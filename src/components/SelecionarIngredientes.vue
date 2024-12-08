@@ -6,6 +6,7 @@ export default {
   components: {
     CardCategoria,
   },
+  emits: ["adicionarIngrediente", "removerIngrediente"],
   data() {
     return {
       categorias: [] as ICategoria[],
@@ -25,7 +26,11 @@ export default {
     </p>
     <ul class="categorias">
       <li v-for="categoria in categorias" :key="categoria.nome">
-        <CardCategoria :categoria="categoria" />
+        <CardCategoria
+          :categoria="categoria"
+          @adicionar-ingrediente="$emit('adicionarIngrediente', $event)"
+          @remover-ingrediente="$emit('removerIngrediente', $event)"
+        />
       </li>
     </ul>
     <p class="paragrafo dica">
